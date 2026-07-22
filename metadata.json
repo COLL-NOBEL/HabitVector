@@ -1,0 +1,6 @@
+{
+  "name": "HabitVector",
+  "description": "An AI-powered timetable, task manager, and tech opportunity finder designed to help students and developers build consistent habits.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
