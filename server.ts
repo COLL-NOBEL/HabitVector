@@ -589,6 +589,6 @@ async function startServer() {
         });
     }
 }
-startServer();
+startServer().catch((err) => console.error("Server start error:", err));
 
 export default app;
