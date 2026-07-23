@@ -192,7 +192,18 @@ export default function App() {
                 },
                 body: JSON.stringify(userProfile),
             });
-            const data = await response.json();
+
+            let data;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                throw new Error(
+                    `Server returned ${response.status}: ${text.substring(0, 100)}`,
+                );
+            }
+
             if (response.ok) {
                 // Map server results to standard UI format (adding ids where missing)
                 const formattedTimetable = (data.timetable || []).map(
@@ -239,7 +250,9 @@ export default function App() {
         } catch (err) {
             console.error(err);
             setApiError(
-                "Error connecting to server. Make sure your GEMINI_API_KEY is configured.",
+                err instanceof Error
+                    ? err.message
+                    : "Error connecting to server.",
             );
         } finally {
             setLoading(false);
@@ -346,7 +359,18 @@ export default function App() {
                     userProfile: profile,
                 }),
             });
-            const data = await response.json();
+
+            let data;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                throw new Error(
+                    `Server returned ${response.status}: ${text.substring(0, 100)}`,
+                );
+            }
+
             if (response.ok) {
                 const formattedTimetable = (data.timetable || []).map(
                     (item: any, idx: number) => ({
@@ -409,7 +433,18 @@ export default function App() {
                     query: customQuery,
                 }),
             });
-            const data = await response.json();
+
+            let data;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                throw new Error(
+                    `Server returned ${response.status}: ${text.substring(0, 100)}`,
+                );
+            }
+
             if (response.ok) {
                 setOpportunities(data.opportunities || []);
                 setSources(data.sources || []);
@@ -441,7 +476,18 @@ export default function App() {
                 },
                 body: JSON.stringify({ interests: interestsTerm }),
             });
-            const data = await response.json();
+
+            let data;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                throw new Error(
+                    `Server returned ${response.status}: ${text.substring(0, 100)}`,
+                );
+            }
+
             if (response.ok) {
                 setHabitRecommendations(data.recommendations || []);
             } else {
@@ -658,7 +704,18 @@ export default function App() {
                 },
                 body: JSON.stringify({ todoList }),
             });
-            const data = await response.json();
+
+            let data;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                data = await response.json();
+            } else {
+                const text = await response.text();
+                throw new Error(
+                    `Server returned ${response.status}: ${text.substring(0, 100)}`,
+                );
+            }
+
             if (response.ok) {
                 const newMissions = (data.timetable || []).map(
                     (item: any, idx: number) => ({
